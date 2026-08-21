@@ -6,8 +6,8 @@
 - **Repo nộp bài:** `Track1_Day21_2A202601578_TranThanhHuyen`
 - **Danh sách thành viên nhóm 3 người:**
   1. **Trần Thanh Huyền** (Mã HV: 2A202601578 - Trưởng nhóm)
-  2. **Nguyễn Thị Ánh**
-  3. **Phạm Tú Anh**
+  2. **Thiều Thị Ngọc Ánh** (Mã HV: 2A202601864)
+  3. **Đỗ Tú Anh** (Mã HV: 2A202601272)
 
 ---
 
@@ -32,10 +32,20 @@ graph TD
 
 ---
 
-## 👤 Đóng góp cá nhân (Trần Thanh Huyền)
-- **Phụ trách chính Phase 1 & Hạ tầng Eval:** Thiết kế Lưới kiểm thử (User Input Grid), xây dựng 20 scenarios đa dạng tình huống bám sát slide Day 19-20 và 18 tài liệu corpus.
-- **Triển khai Tracing & Code Checks:** Cấu hình thành công Braintrust Tracing logger (`BRAINTRUST_PROJECT=ai-evaluation`), lập trình mở rộng hàm `check_followup_count` trong `eval/code_checks.py`.
-- **Chấm nhãn & Calibration:** Thực hiện chấm độc lập file `labels-huyen.csv`, tham gia tranh luận chốt nhãn vàng đồng thuận và viết bổ sung ví dụ Near-Miss cho `judge_prompt.md` V2.
+## 👥 Phân công & Đóng góp của từng thành viên (Nhóm 3 người)
+
+| Thành viên | Phụ trách chính | Các artifact & công việc cụ thể |
+|---|---|---|
+| **Trần Thanh Huyền**<br>*(Mã HV: 2A202601578 - Trưởng nhóm)* | **Phase 1 (Coverage Design) & Eval Infrastructure** | • **Phase 1:** Chủ trì thiết kế Lưới kiểm thử (Input Grid 3 dimensions), xây dựng & chốt 20 scenarios (`dataset-v1.jsonl`).<br>• **Hạ tầng & Tracing:** Cấu hình Braintrust/LangSmith Tracing logger (`tracing.py`), thực thi `run_eval.py` để thu thập `results-v1.jsonl`.<br>• **Report & Management:** Tổng hợp Mục 1, 2 & 7 trong `REPORT.md`, chủ trì thảo luận chốt Verdict `HOLD`. |
+| **Nguyễn Thị Ánh**<br>*(Mã HV: 2A20260xxxx)* | **Phase 2 (Human Baseline) & Phase 3 (Code Rules & Routing)** | • **Phase 2:** Chủ trì quy trình gán nhãn người (`labels-anh.csv`), chạy `agreement.py` đo chỉ số Human-Human Agreement (đạt **90%**).<br>• **Phase 3 (Code Check):** Lập trình mở rộng làn kiểm thử Code `eval/code_checks.py` (`schema_valid`, `citation_exists`, `quote_verbatim`, `check_followup_count`) giúp tối ưu chi phí API ($0/run).<br>• **Report:** Xây dựng chi tiết Rubric v1 (Mục 3) và Bảng Routing Map (Mục 4) trong `REPORT.md`. |
+| **Phạm Tú Anh**<br>*(Mã HV: 2A20260yyyy)* | **Phase 4 (Judge Calibration) & Phase 5 (Scorecard & Gate)** | • **Phase 4:** Phụ trách tinh chỉnh `eval/judge_prompt.md` qua 2 vòng (V1 → V2), thêm các ví dụ Near-Miss nâng Agreement từ 65% lên **85%**.<br>• **Phase 5:** Đặt pre-committed thresholds, phân tích Slice Breakdown & đọc tay 3 trace fail lớn nhất (`sc-12`, `sc-06`, `sc-05`).<br>• **Report:** Tổng hợp Calibration Report (Mục 5), Scorecard & Gate (Mục 6) trong `REPORT.md`, đề xuất hướng sửa System Prompt. |
+
+---
+
+### 👤 Đóng góp cá nhân dành riêng cho người nộp bài (Trần Thanh Huyền)
+- **Phụ trách chính Phase 1 & Hạ tầng Eval:** Thiết kế Lưới kiểm thử (User Input Grid), xây dựng 20 scenarios đa dạng tình huống bám sát slide Day 19-20 và 18 tài liệu corpus (`dataset-v1.jsonl`).
+- **Triển khai Tracing & Chạy Eval:** Cấu hình Braintrust Tracing logger (`BRAINTRUST_PROJECT=ai-evaluation`), thực thi `run_eval.py` thu thập dữ liệu thô `results-v1.jsonl`.
+- **Chấm nhãn & Quản lý bài nộp:** Chấm nhãn độc lập `labels-huyen.csv`, chủ trì thảo luận nhóm chốt nhãn vàng đồng thuận, hoàn thiện các Mục 1, 2, 7 trong `REPORT.md` và chốt Verdict `HOLD`.
 
 ---
 

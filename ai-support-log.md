@@ -23,12 +23,12 @@
 * **AI sai, hời hợt hoặc làm mất coverage ở đâu?** AI hay sinh ra mấy câu hỏi quá tròn trịa, sạch sẽ và đủ thông tin. Nếu dùng nguyên văn câu AI tạo thì sẽ mất sạch các câu hỏi mơ hồ, cắt cụt thiếu context ngoài đời.
 * **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình trực tiếp xóa bỏ 2 câu AI làm quá chi tiết, tự gõ lại câu `sc-06` ("Eval này ổn chưa ad?") cắt hết bối cảnh slide để ép Tutor phải tự biết hỏi lại học viên.
 
-### 👤 2. Nguyễn Thị Ánh
+### 👤 2. Thiều Thị Ngọc Ánh
 * **AI đã giúp tôi ở đâu?** Giúp mình lọc nhanh danh sách các câu trả lời mà AI Judge chấm lệch với nhãn người chấm ở Vòng 1.
 * **AI sai, hời hợt hoặc làm mất coverage ở đâu?** Con LLM Judge Vòng 1 cực kỳ "dễ tính", ai hỏi gì nó cũng cho PASS hết, kể cả khi Tutor trả lời phỏng đoán lung tung hoặc viết hộ luôn prompt làm bài Capstone.
 * **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình tự tay chấm độc lập file `labels-anh.csv`, kiên quyết bắt lỗi FAIL ở câu `sc-05` (quote lệch) và `sc-12` (làm hộ bài). Đồng thời mình tự nghĩ thêm 3 ví dụ Near-Miss để dằn mặt con Judge ở Vòng 2.
 
-### 👤 3. Phạm Tú Anh
+### 👤 3. Đỗ Tú Anh
 * **AI đã giúp tôi ở đâu?** Giúp mình dàn trang các bảng biểu markdown trong file REPORT.md cho đẹp mắt và gợi ý kịch bản nói 2 phút trước lớp.
 * **AI sai, hời hợt hoặc làm mất coverage ở đâu?** AI cứ khuyên nhóm mình chọn phán quyết "Ship with conditions" (Cho ship kèm điều kiện) để nhìn cho đẹp báo cáo.
 * **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình kiên quyết bác bỏ gợi ý của AI, bảo vệ nguyên tắc **"Đã chốt ngưỡng nào là làm đúng ngưỡng đó"**. Vì tiêu chí `scope_accuracy` chưa đạt 100% (dính lỗi làm hộ bài) và câu mơ hồ pass rate 0% nên nhóm phải chốt **HOLD (CHƯA SHIP)**.
