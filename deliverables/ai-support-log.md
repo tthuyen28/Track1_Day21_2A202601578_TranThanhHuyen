@@ -7,35 +7,25 @@
 
 ## 1. Bảng khai báo dùng AI ở từng bước
 
-| # | Bước | AI giúp nhóm làm gì | Cách con người kiểm tra & chốt kết quả |
-|---|------|-------------------|---------------------------------------|
-| 1 | **Phase 1: Sinh câu hỏi thử nghiệm** | Nhóm đưa trước khung grid, nhờ AI gợi ý các kiểu diễn đạt ngắn/dài/viết tắt của học viên. | Nhóm ngồi soi từng câu (Keep/Rewrite/Reject). Bỏ 2 câu trùng ý, tự viết lại 4 câu sát thực tế hơn (`sc-04` teencode, `sc-05` trỏ slide, `sc-08` giả định sai). |
-| 2 | **Phase 3: Gợi ý hàm code checks** | Nhờ AI viết mẫu đoạn regex/string matching trong Python cho tiêu chí `quote_verbatim` và `followup_count`. | Chạy thử trực tiếp bằng file `code_checks.py`, tự kiểm tra lại từng dòng output xem code báo pass/fail có chuẩn xác không. |
-| 3 | **Phase 4: Gợi ý dàn ý Judge Prompt** | Nhờ AI lên khung cho `judge_prompt.md` và tóm tắt nhanh mấy case bất đồng giữa AI và người. | Nhóm tự tay đọc 4 case lệch ở Vòng 1, tự viết thêm 3 ví dụ Near-Miss thực tế vào Prompt V2 để kéo độ đồng thuận từ 65% lên 85%. |
-| 4 | **Phase 6: Soạn bản nháp Report** | Nhờ AI lên khung trình bày báo cáo PM trong file `REPORT.md`. | Nhóm tự chốt trước các ngưỡng điểm (Thresholds), tự đưa ra quyết định **HOLD (CHƯA SHIP)** chứ không nghe theo gợi ý "cho qua" của AI. |
+| #   | Bước                                  | AI giúp nhóm làm gì                                                                                        | Cách con người kiểm tra & chốt kết quả                                                                                                                         |
+| --- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Phase 1: Sinh câu hỏi thử nghiệm**  | Nhóm đưa trước khung grid, nhờ AI gợi ý các kiểu diễn đạt ngắn/dài/viết tắt của học viên.                  | Nhóm ngồi soi từng câu (Keep/Rewrite/Reject). Bỏ 2 câu trùng ý, tự viết lại 4 câu sát thực tế hơn (`sc-04` teencode, `sc-05` trỏ slide, `sc-08` giả định sai). |
+| 2   | **Phase 3: Gợi ý hàm code checks**    | Nhờ AI viết mẫu đoạn regex/string matching trong Python cho tiêu chí `quote_verbatim` và `followup_count`. | Chạy thử trực tiếp bằng file `code_checks.py`, tự kiểm tra lại từng dòng output xem code báo pass/fail có chuẩn xác không.                                     |
+| 3   | **Phase 4: Gợi ý dàn ý Judge Prompt** | Nhờ AI lên khung cho `judge_prompt.md` và tóm tắt nhanh mấy case bất đồng giữa AI và người.                | Nhóm tự tay đọc 4 case lệch ở Vòng 1, tự viết thêm 3 ví dụ Near-Miss thực tế vào Prompt V2 để kéo độ đồng thuận từ 65% lên 85%.                                |
+| 4   | **Phase 6: Soạn bản nháp Report**     | Nhờ AI lên khung trình bày báo cáo PM trong file `REPORT.md`.                                              | Nhóm tự chốt trước các ngưỡng điểm (Thresholds), tự đưa ra quyết định **HOLD (CHƯA SHIP)** chứ không nghe theo gợi ý "cho qua" của AI.                         |
 
 ---
 
-## 2. Nhật ký tự rút kinh nghiệm của 3 thành viên
+## 2. Nhật ký tự rút kinh nghiệm
 
-### 👤 1. Trần Thanh Huyền (Trưởng nhóm)
-* **AI đã giúp tôi ở đâu?** AI giúp mình đặt câu hỏi theo kiểu gõ tắt, teencode vội vã của học viên rất nhanh, tiết kiệm thời gian nghĩ câu chữ.
-* **AI sai, hời hợt hoặc làm mất coverage ở đâu?** AI hay sinh ra mấy câu hỏi quá tròn trịa, sạch sẽ và đủ thông tin. Nếu dùng nguyên văn câu AI tạo thì sẽ mất sạch các câu hỏi mơ hồ, cắt cụt thiếu context ngoài đời.
-* **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình trực tiếp xóa bỏ 2 câu AI làm quá chi tiết, tự gõ lại câu `sc-06` ("Eval này ổn chưa ad?") cắt hết bối cảnh slide để ép Tutor phải tự biết hỏi lại học viên.
-
-### 👤 2. Thiều Thị Ngọc Ánh
-* **AI đã giúp tôi ở đâu?** Giúp mình lọc nhanh danh sách các câu trả lời mà AI Judge chấm lệch với nhãn người chấm ở Vòng 1.
-* **AI sai, hời hợt hoặc làm mất coverage ở đâu?** Con LLM Judge Vòng 1 cực kỳ "dễ tính", ai hỏi gì nó cũng cho PASS hết, kể cả khi Tutor trả lời phỏng đoán lung tung hoặc viết hộ luôn prompt làm bài Capstone.
-* **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình tự tay chấm độc lập file `labels-anh.csv`, kiên quyết bắt lỗi FAIL ở câu `sc-05` (quote lệch) và `sc-12` (làm hộ bài). Đồng thời mình tự nghĩ thêm 3 ví dụ Near-Miss để dằn mặt con Judge ở Vòng 2.
-
-### 👤 3. Đỗ Tú Anh
-* **AI đã giúp tôi ở đâu?** Giúp mình dàn trang các bảng biểu markdown trong file REPORT.md cho đẹp mắt và gợi ý kịch bản nói 2 phút trước lớp.
-* **AI sai, hời hợt hoặc làm mất coverage ở đâu?** AI cứ khuyên nhóm mình chọn phán quyết "Ship with conditions" (Cho ship kèm điều kiện) để nhìn cho đẹp báo cáo.
-* **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình kiên quyết bác bỏ gợi ý của AI, bảo vệ nguyên tắc **"Đã chốt ngưỡng nào là làm đúng ngưỡng đó"**. Vì tiêu chí `scope_accuracy` chưa đạt 100% (dính lỗi làm hộ bài) và câu mơ hồ pass rate 0% nên nhóm phải chốt **HOLD (CHƯA SHIP)**.
+- **AI đã giúp tôi ở đâu?** AI giúp mình đặt câu hỏi theo kiểu gõ tắt, teencode vội vã của học viên rất nhanh, tiết kiệm thời gian nghĩ câu chữ.
+- **AI sai, hời hợt hoặc làm mất coverage ở đâu?** AI hay sinh ra mấy câu hỏi quá tròn trịa, sạch sẽ và đủ thông tin. Nếu dùng nguyên văn câu AI tạo thì sẽ mất sạch các câu hỏi mơ hồ, cắt cụt thiếu context ngoài đời.
+- **Tôi đã tự sửa hoặc quyết định lại điều gì?** Mình trực tiếp xóa bỏ 2 câu AI làm quá chi tiết, tự gõ lại câu `sc-06` ("Eval này ổn chưa ad?") cắt hết bối cảnh slide để ép Tutor phải tự biết hỏi lại học viên.
 
 ---
 
 ## 3. Cam kết tuân thủ 7 Luật Bài Lab Capstone
+
 - [x] **Luật 1 (Human-first Coverage):** Con người tự chốt Dimensions & Combinations trước, AI chỉ diễn đạt lại câu chữ.
 - [x] **Luật 2 (Human Baseline):** Nhãn người 100% do Huyền, Ánh, Tú Anh tự chấm độc lập (Đồng thuận 90%).
 - [x] **Luật 3 (Unique Test Value):** Mỗi câu hỏi đại diện cho 1 tình huống rủi ro riêng biệt.
