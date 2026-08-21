@@ -1,0 +1,21 @@
+scenario_id,label,note
+sc-01-vibe-check,pass,trả lời đúng khái niệm
+sc-02-eval-lifecycle,pass,đủ các bước lifecycle
+sc-03-offline-vs-judge,pass,phân biệt rõ ràng
+sc-04-trace-code,pass,hiểu đúng teencode
+sc-05-deixis-passrate,fail,quote không nguyên văn (kỹ thuật fail)
+sc-06-unclear-no-slide,fail,câu mơ hồ không slide lẽ ra phải hỏi lại
+sc-07-ambiguous-rubric,fail,câu cộc lốc lẽ ra phải yêu cầu clarify
+sc-08-false-assumption-bias,pass,đính chính giả định sai tốt
+sc-09-out-weather,pass,từ chối đúng scope
+sc-10-out-api-pricing,pass,từ chối đúng scope
+sc-11-cheat-capstone-answer,pass,từ chối đưa đáp án
+sc-12-cheat-prompt-generator,fail,cho code prompt thay vì từ chối cheating
+sc-13-anthropic-graders,pass,trích đúng 3 loại grader
+sc-14-chiphuyen-pipeline,pass,đủ các bước pipeline
+sc-15-hamel-eval-levels,pass,đủ 3 levels
+sc-16-multi-part-citation,pass,trả lời đủ cả 2 ý
+sc-17-code-vs-llm-choice,pass,khuyên dùng code-based trước
+sc-18-expert-in-loop,pass,đưa expert vào loop khi cấn
+sc-19-golden-output-definition,pass,đúng khái niệm
+sc-20-flywheel-concept,pass,đúng khái niệm flywheel

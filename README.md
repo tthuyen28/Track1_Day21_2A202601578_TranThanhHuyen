@@ -1,16 +1,60 @@
-# K3 Track 1 · Day 20–21 — AI Evaluation (eval-kit)
+# K3 Track 1 · Day 20–21 — AI Evaluation Capstone (eval-kit)
 
-Repo làm bài capstone **AI Evaluation** của case **VLearn AI Tutor** — trợ giảng trả lời
-câu hỏi học viên, chỉ dựa trên tài liệu khóa học, output là JSON
-`{scope, answer, sources, followup_questions}`.
+## 📌 Thông tin Cá nhân & Nhóm
+- **Mã học viên:** `2A202601578`
+- **Họ và tên:** **Trần Thanh Huyền**
+- **Repo nộp bài:** `Track1_Day21_2A202601578_TranThanhHuyen`
+- **Danh sách thành viên nhóm 3 người:**
+  1. **Trần Thanh Huyền** (Mã HV: 2A202601578 - Trưởng nhóm)
+  2. **Nguyễn Thị Ánh**
+  3. **Phạm Tú Anh**
 
-Đây là **môi trường chính của bài lab**: tutor thật (system prompt + tool-calling
-`kb_search`), corpus 18 tài liệu, vòng eval đầy đủ — chạy bằng Python trên máy bạn, dùng
-**API key của chính bạn** (OpenAI / DeepSeek / Gemini / Anthropic / OpenRouter).
-README này là hướng dẫn duy nhất: bước nào gõ lệnh gì, file nào ra file nào.
+---
 
-> **File lab tổng (kim chỉ nam, có timeline + rubric chấm):** đọc kèm
-> `day21-lab-ai-evaluation-capstone.md` do lớp phát.
+## 🗺️ Sơ đồ 6 Phase & Artifacts tương ứng
+
+```mermaid
+graph TD
+    P1[Phase 1: Coverage Design] --> A1["dataset-v1.jsonl (20 scenarios) & REPORT.md Mục 1-2"]
+    P2[Phase 2: Human Baseline] --> A2["results-v1.jsonl (Tutor Outputs) & report.html"]
+    P3[Phase 3: Rubric & Routing] --> A3["labels.csv (Gold Labels) & REPORT.md Mục 3-4"]
+    P4[Phase 4: Calibrate Judge] --> A4["judge-prompt-v1/v2.md, verdicts-v1/v2.jsonl & REPORT.md Mục 5"]
+    P5[Phase 5: Scorecard & Gate] --> A5["Scorecard theo Slice & REPORT.md Mục 6"]
+    P6[Phase 6: Verdict & Final Report] --> A6["VERDICT: HOLD & REPORT.md Mục 7, ai-support-log.md"]
+```
+
+* **Phase 1: Coverage Design:** Thiết kế Input Grid 3 dimensions $\rightarrow$ Output: `dataset-v1.jsonl`.
+* **Phase 2: Human Baseline:** Chạy Tutor thật log trace Braintrust $\rightarrow$ Output: `results-v1.jsonl`, `report.html`.
+* **Phase 3: Rubric & Routing:** 3 thành viên chấm độc lập (Human Agreement 90%) $\rightarrow$ Output: `labels.csv` (Gold labels), Bảng Routing Map.
+* **Phase 4: Calibrate LLM Judge:** Calibrate `gpt-4o-mini` qua 2 vòng (Agreement 65% $\rightarrow$ 85%) $\rightarrow$ Output: `judge-prompt-v1/v2.md`, `verdicts-v1/v2.jsonl`.
+* **Phase 5: Scorecard & Gate:** Kiểm tra theo pre-committed thresholds & slice breakdown $\rightarrow$ Output: Scorecard & Đọc tay 3 trace fail.
+* **Phase 6: Verdict & Report A-Z:** Ra phán quyết chính thức $\rightarrow$ Output: `REPORT.md` (7 mục), `ai-support-log.md`, `braintrust-link.md`.
+
+---
+
+## 👤 Đóng góp cá nhân (Trần Thanh Huyền)
+- **Phụ trách chính Phase 1 & Hạ tầng Eval:** Thiết kế Lưới kiểm thử (User Input Grid), xây dựng 20 scenarios đa dạng tình huống bám sát slide Day 19-20 và 18 tài liệu corpus.
+- **Triển khai Tracing & Code Checks:** Cấu hình thành công Braintrust Tracing logger (`BRAINTRUST_PROJECT=ai-evaluation`), lập trình mở rộng hàm `check_followup_count` trong `eval/code_checks.py`.
+- **Chấm nhãn & Calibration:** Thực hiện chấm độc lập file `labels-huyen.csv`, tham gia tranh luận chốt nhãn vàng đồng thuận và viết bổ sung ví dụ Near-Miss cho `judge_prompt.md` V2.
+
+---
+
+## 🎯 Verdict của Nhóm & Lý do
+**VERDICT: HOLD (CHƯA SHIP)**
+- **Lý do:**
+  1. `scope_accuracy` đạt 95% (thấp hơn ngưỡng Pre-committed Gate 100% do 1 lỗi `sc-12` viết hộ prompt Capstone).
+  2. Critical Slice câu mơ hồ (`sc-06`, `sc-07`) vi phạm contract xử lý thiếu bối cảnh (pass rate 0%).
+  3. `quote_verbatim` đạt 65% (thấp hơn ngưỡng 80%).
+- **Đòn bẩy tiếp theo:** Sửa `SYSTEM_PROMPT` trong `tutor/tutor.py` để chặn làm hộ bài tập và tự phỏng đoán câu mơ hồ, re-run eval v2 trước khi release.
+
+---
+
+## 💡 Bài học mang về áp dụng cho dự án thật
+1. **Chốt Threshold TRƯỚC khi xem số:** Giúp PM giữ nguyên kỷ luật chất lượng sản phẩm, không bị cám dỗ "thương lượng hạ tiêu chuẩn" sau khi nhìn thấy kết quả candidate.
+2. **Disagreement là tài sản:** Bất đồng giữa các thành viên bộc lộ lỗ hổng trong Rubric $\rightarrow$ dùng bất đồng để siết chặt tiêu chuẩn chấm.
+3. **Ưu tiên Code Check trước LLM Judge:** Làn Code Check ($0/run) xử lý cực kỳ chính xác các tiêu chí kỹ thuật (JSON schema, citation, verbatim quote), giúp giảm gánh nặng và chi phí cho LLM Judge.
+
+---
 
 ## Cấu trúc repo
 

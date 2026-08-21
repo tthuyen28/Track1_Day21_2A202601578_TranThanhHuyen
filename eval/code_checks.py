@@ -65,10 +65,22 @@ def check_quote_verbatim(rec, section_tokens):
     return True, None
 
 
+def check_followup_count(rec):
+    """followup_questions phải là list gồm đúng 3 phần tử."""
+    out = rec.get("output") or {}
+    if out.get("_parse_error"):
+        return None, "bỏ qua (JSON vỡ)"
+    fq = out.get("followup_questions")
+    if not isinstance(fq, list) or len(fq) != 3:
+        return False, f"followup_questions không đúng 3 câu (thực tế: {len(fq) if isinstance(fq, list) else 0})"
+    return True, None
+
+
 CHECKS = [  # thêm check của nhóm vào đây
     ("schema_valid", check_schema),
     ("citation_exists", check_citation_exists),
     ("quote_verbatim", check_quote_verbatim),
+    ("followup_count", check_followup_count),
 ]
 
 

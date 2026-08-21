@@ -51,8 +51,10 @@ class _Braintrust:
 
     def log_run(self, name, inputs=None, outputs=None, metrics=None, metadata=None):
         try:
+            clean_metrics = {k: float(v) for k, v in (metrics or {}).items()
+                             if isinstance(v, (int, float)) and not isinstance(v, bool)}
             span = self._logger.start_span(name=name, type="task")
-            span.log(input=inputs, output=outputs, metrics=metrics, metadata=metadata)
+            span.log(input=inputs, output=outputs, metrics=clean_metrics, metadata=metadata)
             span.end()
         except Exception as e:
             _warn_once(self.backend, e)
